@@ -1,0 +1,19 @@
+version: '2'
+services:
+  jmeter_master:
+    image: stelar/jmeter-master:latest
+    command: -p /jmeter/jmeter.properties -j /jmeter/master.log
+    volumes:
+      - ./data/master:/jmeter
+    links:
+      - jmeter_slave
+    restart: always
+
+  jmeter_slave:
+    image: stelar/jmeter-slave:latest
+    command: -p /jmeter/jmeter.properties -j /jmeter/slave.log
+    volumes:
+      - ./data/slave:/jmeter
+    restart: always
+
+
